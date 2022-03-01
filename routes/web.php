@@ -21,5 +21,6 @@ Route::get('/order', function () {
     return view('backend.pages.order');
 });
 
-
-// new commit
+Route::get('/product',function(){
+    return view('backend.pages.product.productList');
+});
