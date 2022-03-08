@@ -14,11 +14,13 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
+        Category::create(
+            [
             // db coloum name || value
             'name'=>'wood',
             'details'=>'asdfghjkl',
-        ]);
+        ]
+    );
 
         Category::create([
             // db coloum name || value
