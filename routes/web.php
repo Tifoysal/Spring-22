@@ -20,4 +20,6 @@ Route::get('/product',function(){
 Route::get('/category/form',[CategoryController::class,'categoryForm'])->name('category.form');
 Route::post('/category/post',[CategoryController::class,'categoryPost'])->name('category.post');
 
-Route::get('products/list',[ProductController::class,'list'])->name('product.list');
+Route::get('/product/show',[ProductController::class,'product'])->name('admin.product.show');
+Route::get('/product/create',[ProductController::class,'productCreate'])->name('product.create');
+Route::post('/product/store',[ProductController::class,'productStore'])->name('product.store');

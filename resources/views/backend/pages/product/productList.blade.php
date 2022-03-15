@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">product</h1>
 
-    <a class="btn btn-success" href="">Create New Product</a>
+    <a class="btn btn-success" href="{{route('product.create')}}">Create New Product</a>
 
             </div>
     <table class="table">
@@ -17,8 +17,7 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($products as $singleBiscuit)
-
+  @foreach($items as $singleBiscuit)
     <tr>
       <th scope="row">1</th>
       <td>{{$singleBiscuit->name}}</td>
