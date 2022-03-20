@@ -11,6 +11,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Product name</th>
+      <th scope="col">Category name</th>
       <th scope="col">quantity</th>
       <th scope="col">Price</th>
       <th scope="col">Action</th>
@@ -19,8 +20,9 @@
   <tbody>
   @foreach($items as $singleBiscuit)
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{$singleBiscuit->id}}</th>
       <td>{{$singleBiscuit->name}}</td>
+      <td>{{$singleBiscuit->category->name}}</td>
       <td>{{$singleBiscuit->quantity}}</td>
       <td>{{$singleBiscuit->price}}</td>
       <td>

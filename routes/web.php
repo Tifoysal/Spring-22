@@ -17,6 +17,7 @@ Route::get('/product',function(){
 });
 
 // url,controller name, controller method,route name
+Route::get('/category/list',[CategoryController::class,'list'])->name('category.list');
 Route::get('/category/form',[CategoryController::class,'categoryForm'])->name('category.form');
 Route::post('/category/post',[CategoryController::class,'categoryPost'])->name('category.post');
 

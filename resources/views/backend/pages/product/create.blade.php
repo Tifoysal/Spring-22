@@ -8,11 +8,19 @@
       <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    {{-- <div class="form-group">
-        <label for="exampleInputEmail1">Category</label>
-        <input name="category" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div> --}}
+
+    <div class="form-group">
+      <label for="category">Category</label>
+
+        <select class="form-control" name="category_id" id="">
+            @foreach($categories as $cate)
+            <option value="{{$cate->id}}">{{$cate->name}}</option>
+            @endforeach
+        </select>
+
+    </div>
+
+
     <div class="form-group">
       <label for="exampleInputPassword1">Quantity</label>
       <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" placeholder="Password">

@@ -11,5 +11,6 @@
     <input name="category_details" type="text" class="form-control" id="exampleInputPassword1" placeholder="Details">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+  <a href="{{route('category.list')}}" class="btn btn-primary">List here</a>
 </form>
 @endsection
