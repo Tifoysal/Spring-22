@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
+        // $items = Product::with('category')->get();
         $items = Product::with('category')->get();
-//        dd($items);
         return view('backend.pages.product.productList',compact('items'));
     }
 
@@ -22,11 +22,12 @@ class ProductController extends Controller
     }
 
     public function productStore(Request $request){
-//        dd($request->all());
+    //    dd($request->all());
         Product::create([
             // coloum name of db || name of input field
             'name'=> $request->name,
             'category_id'=> $request->category_id,
+            'weight'=> $request->weight,
             'quantity'=> $request->quantity,
             'price'=>$request->price,
             'details'=>$request->details
