@@ -14,16 +14,16 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        // Product::create([
-        //     'name'=>'product 1',
-        //         'category_id'=>1,
-        //         'quantity'=>10,
-        //         'price'=>20.0,
-        //         'details'=>'test',
-        // ]);
+        Product::create([
+            'name'=>'product 1',
+                'category_id'=>1,
+                'quantity'=>10,
+                'price'=>20.0,
+                'details'=>'test',
+        ]);
         Product::create([
                 'name'=>'product 1',
-                'category_name'=>1,
+                'category_id'=>1,
                 'quantity'=>10,
                 'price'=>20.0,
                 'details'=>'test',
