@@ -12,6 +12,7 @@
       <th scope="col">#</th>
       <th scope="col">Product name</th>
       <th scope="col">Category name</th>
+      <th scope="col">Image</th>
       <th scope="col">quantity</th>
       <th scope="col">Price</th>
       <th scope="col">Action</th>
@@ -23,6 +24,9 @@
       <th scope="row">{{$singleBiscuit->id}}</th>
       <td>{{$singleBiscuit->name}}</td>
       <td>{{$singleBiscuit->category->name}}</td>
+      <td>
+        <img width="150px" src="{{url('/uploads',$singleBiscuit->image)}}" alt="product image">
+      </td>
       <td>{{$singleBiscuit->quantity}}</td>
       <td>{{$singleBiscuit->price}}</td>
       <td>
