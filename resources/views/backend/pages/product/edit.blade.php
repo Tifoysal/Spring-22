@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<form action="{{route('product.update')}}" method="post">
+<form action="{{route('product.update')}}" method="post" enctype="multipart/form-data">
   @method('put')
     @csrf
     <input type="hidden" value="{{$product->id}}" name="product_id">
@@ -37,6 +37,10 @@
         <label for="exampleInputEmail1">Details</label>
         <input value="{{$product->details}}" name="details" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Image</label>
+        <input name="image" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
