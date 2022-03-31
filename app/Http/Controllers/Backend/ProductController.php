@@ -22,15 +22,18 @@ class ProductController extends Controller
     }
 
     public function productStore(Request $request){
-    $request->validate([
-        'name'=>'required',
-        'category_id'=>'required',
-        'weight'=>'required',
-        'quantity'=>'required | integer' ,
-        'price'=>'required|numeric',
-        'details'=>'required',
-        'image'=>'image'
-    ]);
+
+            $request->validate(
+                [
+                'name'=>'required',
+                'category_id'=>'required',
+                'weight'=>'required',
+                'quantity'=>'required|integer' ,
+                'price'=>'required|numeric',
+                'details'=>'required',
+                'image'=>'image'
+            ]
+            );
     //    dd($request->all());
     $filename = null;
         if ($request->hasFile('image')) {
@@ -55,14 +58,14 @@ class ProductController extends Controller
     }
 
     public function productEdit($id){
-        $categories = Category::all(); 
+        $categories = Category::all();
         $product = Product::find($id);
         if ($product) {
         return view('backend.pages.product.edit',compact('categories','product'));
         } else {
             return redirect()->back();
         }
-        
+
     }
 
     public function productUpdate(Request $request){
@@ -91,8 +94,8 @@ class ProductController extends Controller
         } else {
             return redirect()->back();
         }
-        
-        
+
+
     }
 
     public function productDelete($id){
@@ -104,6 +107,6 @@ class ProductController extends Controller
         } else {
         return redirect()->back();
         }
-        
+
     }
 }
