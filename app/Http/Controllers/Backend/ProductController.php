@@ -34,7 +34,7 @@ class ProductController extends Controller
                 'image'=>'image'
             ]
             );
-    //    dd($request->all());
+//        dd($request->all());
     $filename = null;
         if ($request->hasFile('image')) {
             $file=$request->file('image');
