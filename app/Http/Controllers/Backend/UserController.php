@@ -15,6 +15,7 @@ class UserController extends Controller
 
     public function doLogin(Request $request)
     {
+//        dd($request->all());
         $request->validate([
            'email'=>'required|email',
            'password'=>'required|min:5'
