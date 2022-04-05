@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 
 
 Route::get('/',[HomeController::class,'home'])->name('home');
+Route::post('/customer/registration',[HomeController::class,'customerRegistration'])->name('customer.registration');
 
 Route::get('/admin/login',[UserController::class,'login'])->name('admin.login');
 Route::post('/admin/do-login',[UserController::class,'doLogin'])->name('admin.do.login');
@@ -44,5 +45,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
     Route::put('/product/update',[ProductController::class,'productUpdate'])->name('product.update');
     Route::get('/product/delete/{id}',[ProductController::class,'productDelete'])->name('product.delete');
 
+    //customer
+    Route::get('/user/list',[UserController::class,'list'])->name('user.list');
 });
 

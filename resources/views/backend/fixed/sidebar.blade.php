@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('user.list')}}">
                     <span data-feather="users"></span>
                     Customers
                 </a>

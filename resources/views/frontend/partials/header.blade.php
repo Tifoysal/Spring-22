@@ -23,8 +23,53 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact Us</a>
                     </li>
+                    <li class="nav-item">
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Login / Registration
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Customer Registration Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{route('customer.registration')}}" method="post">
+                @csrf
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Enter Customer Name:</label>
+                        <input class="form-control" type="text" required name="name" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Enter Customer Email:</label>
+                        <input class="form-control" type="email" required name="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Enter Customer Password:</label>
+                        <input class="form-control" type="password" required name="password" placeholder="Enter Password">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
