@@ -32,6 +32,15 @@ class HomeController extends Controller
 
         return redirect()->back();
 
+    }
 
+    public function showProduct($product_id)
+    {
+        //eloquent query- Model
+        //raw query or query builder
+        //find, first, get, all, where(), with, whereHas,
+        //bootstrap grid
+        $product=Product::find($product_id);
+        return view('frontend.pages.product',compact('product'));
     }
 }

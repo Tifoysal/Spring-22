@@ -30,16 +30,6 @@
 
 <body>
 
-<!-- ***** Preloader Start ***** -->
-<div id="preloader">
-    <div class="jumper">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<!-- ***** Preloader End ***** -->
-
     @include('frontend.partials.header')
 
 <!-- Page Content -->

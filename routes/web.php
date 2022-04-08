@@ -11,12 +11,17 @@ use App\Http\Controllers\Backend\CategoryController;
 
 Route::get('/',[HomeController::class,'home'])->name('home');
 Route::post('/customer/registration',[HomeController::class,'customerRegistration'])->name('customer.registration');
+Route::get('/product/view/{id}',[HomeController::class,'showProduct'])->name('product.view');
 
+
+
+
+
+
+
+//admin routes start here
 Route::get('/admin/login',[UserController::class,'login'])->name('admin.login');
 Route::post('/admin/do-login',[UserController::class,'doLogin'])->name('admin.do.login');
-
-
-
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
     Route::get('/logout',[UserController::class,'logout'])->name('admin.logout');
@@ -48,4 +53,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
     //customer
     Route::get('/user/list',[UserController::class,'list'])->name('user.list');
 });
+
+
 

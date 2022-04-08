@@ -39,7 +39,7 @@
                 @foreach($products as $data)
                 <div class="col-md-4">
                     <div class="product-item">
-                        <a href="#">
+                        <a href="{{route('product.view',$data->id)}}">
                             <img src="{{url('/uploads/'.$data->image)}}" alt="DFASF" style="height: 300px;">
                         </a>
                         <div class="down-content">
