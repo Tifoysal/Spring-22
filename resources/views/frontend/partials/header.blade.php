@@ -30,6 +30,9 @@
                             Login / Registration
                         </button>
                     </li>
+                    <li class="nav-item">
+                        <a style="color:white" href="{{route('cart.view')}}">Cart ({{count(session()->get('cart'))}})</a>
+                    </li>
                 </ul>
             </div>
         </div>
