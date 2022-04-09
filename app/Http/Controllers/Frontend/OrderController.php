@@ -44,12 +44,27 @@ class OrderController extends Controller
 
 
             //if not empty but product exist step 2
+                if(array_key_exists($product_id,$getCart))
+                {
+                    //increment quantity of existing product.
+                    ++$getCart[$product_id]['quantity'];
+                    session()->put('cart',$getCart);
+                    return redirect()->back()->with('message','Product Quantity Updated');
+                }else
+                {
+                    //if not empty but product is different step 3
+                    $getCart[$product->id]=[
+                            'name'=>$product->name,
+                            'price'=>$product->price,
+                            'quantity'=>1,
+                            'image'=>$product->image,
+                            'subtotal'=>$product->price,
+                            'discount'=>5,
+                    ];
+                    session()->put('cart',$getCart);
+                    return redirect()->back()->with('message','Product Added to Cart.');
+                }
 
-
-
-
-
-            //if not empty but product is different step 3
 
 
 
