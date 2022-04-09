@@ -31,7 +31,7 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <a style="color:white" href="{{route('cart.view')}}">Cart ({{count(session()->get('cart'))}})</a>
+                        <a style="color:white" href="{{route('cart.view')}}">Cart ({{session()->has('cart')?count(session()->get('cart')):0}})</a>
                     </li>
                 </ul>
             </div>

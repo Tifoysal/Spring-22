@@ -65,7 +65,8 @@
                 </tr>
                 </thead>
                 <tbody>
-
+{{--@dd(session()->get('cart'))--}}
+                @if(session()->has('cart'))
                 @foreach(session()->get('cart') as $cartData)
 
                 <tr>
@@ -90,12 +91,23 @@
                 </tr>
                 @endforeach
 
+                @else
+                    <tr>
+                        <td>
+                        <h1>Your Cart is Empty.</h1>
+                        </td>
+                    </tr>
+
+
+                @endif
+
 
                 </tbody>
                 <tfoot>
                 <tr>
                     <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                    <td colspan="2" class="hidden-xs"></td>
+                    <td><a href="{{route('cart.clear')}}" class="btn btn-danger"> Clear Cart</a></td>
+                    <td colspan="" class="hidden-xs"></td>
                     <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
                     <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                 </tr>

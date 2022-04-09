@@ -15,6 +15,7 @@ Route::post('/customer/registration',[HomeController::class,'customerRegistratio
 Route::get('/product/view/{id}',[HomeController::class,'showProduct'])->name('product.view');
 Route::get('/cart/view',[OrderController::class,'viewCart'])->name('cart.view');
 Route::get('/cart/add/{id}',[OrderController::class,'addToCart'])->name('cart.add');
+Route::get('/cart/clear',[OrderController::class,'clearCart'])->name('cart.clear');
 
 
 

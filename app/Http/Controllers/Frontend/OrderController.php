@@ -64,12 +64,11 @@ class OrderController extends Controller
                     session()->put('cart',$getCart);
                     return redirect()->back()->with('message','Product Added to Cart.');
                 }
+    }
 
-
-
-
-
-
-
+    public function clearCart()
+    {
+        session()->forget('cart');
+        return redirect()->back()->with('message','Cart Clear');
     }
 }
