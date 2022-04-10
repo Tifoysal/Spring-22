@@ -2,6 +2,9 @@
 
 @section('page-content')
     <!-- Banner Starts Here -->
+    @if(session()->has('message'))
+        <p class="alert alert-success">{{session()->get('message')}}</p>
+    @endif
     <div class="banner header-text">
         <div class="owl-banner owl-carousel">
             <div class="banner-item-01">

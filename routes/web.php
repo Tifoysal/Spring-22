@@ -16,6 +16,11 @@ Route::get('/product/view/{id}',[HomeController::class,'showProduct'])->name('pr
 Route::get('/cart/view',[OrderController::class,'viewCart'])->name('cart.view');
 Route::get('/cart/add/{id}',[OrderController::class,'addToCart'])->name('cart.add');
 Route::get('/cart/clear',[OrderController::class,'clearCart'])->name('cart.clear');
+Route::get('/cart/delete/{id}',[OrderController::class,'deleteCart'])->name('cart.delete');
+Route::post('/cart/update/{id}',[OrderController::class,'updateCart'])->name('cart.update');
+
+Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
+Route::post('/order/place',[OrderController::class,'orderPlace'])->name('order.place');
 
 
 
