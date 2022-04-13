@@ -15,6 +15,12 @@ class HomeController extends Controller
         return view('frontend.pages.home',compact('products'));
     }
 
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('home');
+    }
+
     public function customerRegistration(Request $request)//typeHint
     {
         $request->validate([

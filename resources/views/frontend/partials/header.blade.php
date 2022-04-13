@@ -26,9 +26,18 @@
                     <li class="nav-item">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Login / Registration
-                        </button>
+                        @guest()
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Login / Registration
+                            </button>
+                        @endguest
+
+                        @auth()
+                            <a href="{{route('logout')}}" class="btn btn-primary">
+                                Logout / {{auth()->user()->name}}
+                            </a>
+                            @endauth
+
                     </li>
                     <li class="nav-item">
                         <a style="color:white" href="{{route('cart.view')}}">Cart ({{session()->has('cart')?count(session()->get('cart')):0}})</a>

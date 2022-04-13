@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Backend\OrderController as BackendOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 
@@ -19,9 +20,15 @@ Route::get('/cart/clear',[OrderController::class,'clearCart'])->name('cart.clear
 Route::get('/cart/delete/{id}',[OrderController::class,'deleteCart'])->name('cart.delete');
 Route::post('/cart/update/{id}',[OrderController::class,'updateCart'])->name('cart.update');
 
-Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
-Route::post('/order/place',[OrderController::class,'orderPlace'])->name('order.place');
 
+
+Route::group(['middleware'=>'auth'],function (){
+
+    Route::get('/logout',[HomeController::class,'logout'])->name('logout');
+    Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
+    Route::post('/order/place',[OrderController::class,'orderPlace'])->name('order.place');
+
+});
 
 
 
@@ -31,8 +38,8 @@ Route::post('/order/place',[OrderController::class,'orderPlace'])->name('order.p
 //admin routes start here
 Route::get('/admin/login',[UserController::class,'login'])->name('admin.login');
 Route::post('/admin/do-login',[UserController::class,'doLogin'])->name('admin.do.login');
-Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
+Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
     Route::get('/logout',[UserController::class,'logout'])->name('admin.logout');
     Route::get('/', function () {
         return view('backend.pages.dashboard');
@@ -61,6 +68,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
     //customer
     Route::get('/user/list',[UserController::class,'list'])->name('user.list');
+
+    Route::get('/order/list',[BackendOrderController::class,'list'])->name('order.list');
+    Route::get('/order/view/{id}',[BackendOrderController::class,'view'])->name('order.view');
 });
 
 

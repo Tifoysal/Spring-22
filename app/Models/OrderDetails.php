@@ -10,4 +10,9 @@ class OrderDetails extends Model
     use HasFactory;
 
     protected $guarded=[];
+
+    public function item()
+    {
+        return $this->belongsTo(Product::class,'item_id','id');
+    }
 }
