@@ -41,9 +41,7 @@ Route::post('/admin/do-login',[UserController::class,'doLogin'])->name('admin.do
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
     Route::get('/logout',[UserController::class,'logout'])->name('admin.logout');
-    Route::get('/', function () {
-        return view('backend.pages.dashboard');
-    })->name('dashboard');
+    Route::get('/', [UserController::class,'dashboard'])->name('dashboard');
 
     Route::get('/order', function () {
         return view('backend.pages.order');

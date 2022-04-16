@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
+    public function dashboard()
+    {
+        $total_order=Order::all()->count();
+        $total_customer=User::where('role','customer')->count();
+
+        return view('backend.pages.dashboard',compact('total_order','total_customer'));
+    }
     public function login()
     {
         return view('backend.pages.login');

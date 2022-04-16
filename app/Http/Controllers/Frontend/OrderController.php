@@ -21,14 +21,17 @@ class OrderController extends Controller
         //get product from database
         $product=Product::find($product_id);
 
-        // get cart from session if has
-        $getCart=session()->get('cart');
+            // get cart from session if has
+            $getCart=session()->get('cart');
 
             //check if cart is empty step 1
             if($getCart==null)
             {
-                $newCart=[
-                    $product->id=>[
+
+                if($product->quantity>=1)
+                {
+                    $newCart=[
+                        $product->id=>[
                             'name'=>$product->name,
                             'price'=>$product->price,
                             'quantity'=>1,
@@ -36,37 +39,51 @@ class OrderController extends Controller
                             'subtotal'=>$product->price,
                             'discount'=>5,
                         ]
-                ];
+                    ];
 
-                session()->put('cart',$newCart);
-
-                return redirect()->back()->with('message','Product Added to Cart');
+                    session()->put('cart',$newCart);
+                    return redirect()->back()->with('message','Product Added to Cart');
+                }
+                return redirect()->back()->with('message','Product stock out.');
 
             }
 
 
             //if not empty but product exist step 2
-                if(array_key_exists($product_id,$getCart))
+            if(array_key_exists($product_id,$getCart))
+            {
+
+                //increment quantity of existing product.
+                ++$getCart[$product_id]['quantity'];
+                if($product->quantity>=$getCart[$product_id]['quantity'])
                 {
-                    //increment quantity of existing product.
-                    ++$getCart[$product_id]['quantity'];
                     $getCart[$product_id]['subtotal']=$getCart[$product_id]['quantity']*$getCart[$product_id]['price'];
                     session()->put('cart',$getCart);
-                    return redirect()->back()->with('message','Product Quantity Updated');
-                }else
+                    return redirect()->back()->with('message','Product Quantity Updated.');
+                }
+                return redirect()->back()->with('message','Product Stock out.');
+            }else
+            {
+                //if not empty but product is different step 3
+                if($product->quantity>=1)
                 {
-                    //if not empty but product is different step 3
                     $getCart[$product->id]=[
-                            'name'=>$product->name,
-                            'price'=>$product->price,
-                            'quantity'=>1,
-                            'image'=>$product->image,
-                            'subtotal'=>$product->price,
-                            'discount'=>5,
+                        'name'=>$product->name,
+                        'price'=>$product->price,
+                        'quantity'=>1,
+                        'image'=>$product->image,
+                        'subtotal'=>$product->price,
+                        'discount'=>5,
                     ];
                     session()->put('cart',$getCart);
                     return redirect()->back()->with('message','Product Added to Cart.');
                 }
+                return redirect()->back()->with('message','Product Stock Out.');
+            }
+
+
+
+
     }
 
     public function clearCart()
@@ -87,11 +104,17 @@ class OrderController extends Controller
     public function updateCart(Request $request,$product_id)
     {
         $getCart=session()->get('cart');
-        $getCart[$product_id]['quantity']=$request->quantity;
-        $getCart[$product_id]['subtotal']=$request->quantity *$getCart[$product_id]['price'];
 
-        session()->put('cart',$getCart);
-        return redirect()->back()->with('message','Product Quantity Updated');
+        $product=Product::find($product_id);
+        if($product->quantity>=$request->quantity)
+        {
+            $getCart[$product_id]['quantity']=$request->quantity;
+            $getCart[$product_id]['subtotal']=$request->quantity *$getCart[$product_id]['price'];
+
+            session()->put('cart',$getCart);
+            return redirect()->back()->with('message','Product Quantity Updated');
+        }
+        return redirect()->back()->with('message','Product Stock Out.');
     }
 
 
@@ -117,16 +140,22 @@ class OrderController extends Controller
         ]);
 
 
-        // step 2 insert into order details
-        foreach(session()->get('cart') as $key=>$cartData)
+        // step 2 insert product into order details
+        foreach(session()->get('cart') as $product_id=>$cartData)
         {
             OrderDetails::create([
                 'order_id'=>$order->id,
-                'item_id'=>$key,
+                'item_id'=>$product_id,
                 'quantity'=>$cartData['quantity'],
                 'unit_price'=>$cartData['price'],
                 'subtotal'=>$cartData['subtotal'],
             ]);
+
+            //stock update here
+            $product=Product::find($product_id);
+            $product->decrement('quantity',$cartData['quantity']);
+
+
         }
         session()->forget('cart');
         return redirect()->route('home')->with('message','Order Placed Successfully');
