@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-6 order-md-1" style="margin-top: 100px;">
             <h4 class="mb-3">Billing address</h4>
-            <form action="{{route('order.place')}}" method="post" class="needs-validation" novalidate="">
+            <form action="{{ route('pay') }}" method="post" class="needs-validation" novalidate="">
                 @csrf
 
                 <div class="row">
@@ -104,7 +104,8 @@
 
 
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now</button>
+
             </form>
         </div>
     </div>

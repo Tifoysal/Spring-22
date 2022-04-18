@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Backend\OrderController as BackendOrderController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 
@@ -22,11 +23,17 @@ Route::post('/cart/update/{id}',[OrderController::class,'updateCart'])->name('ca
 
 
 
+
 Route::group(['middleware'=>'auth'],function (){
 
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+    Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout'); //form dekhbo
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('pay'); // submit korbo
+
     Route::get('/logout',[HomeController::class,'logout'])->name('logout');
-    Route::get('/checkout',[OrderController::class,'checkout'])->name('checkout');
-    Route::post('/order/place',[OrderController::class,'orderPlace'])->name('order.place');
 
 });
 

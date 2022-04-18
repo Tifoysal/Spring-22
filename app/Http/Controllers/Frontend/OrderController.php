@@ -123,44 +123,5 @@ class OrderController extends Controller
         return view('frontend.pages.checkout');
     }
 
-    public function orderPlace(Request  $request)
-    {
-//        dd($request->all());
 
-        //step 1 create order
-
-        $order=Order::create([
-//           'user_id' =>auth()->user()->id,
-           'user_id' =>1,
-           'receiver_first_name' =>$request->first_name,
-           'receiver_last_name' =>$request->last_name,
-           'receiver_email' =>$request->email,
-           'receiver_address' =>$request->address,
-           'total' =>array_sum(array_column(session()->get('cart'),'subtotal')),
-        ]);
-
-
-        // step 2 insert product into order details
-        foreach(session()->get('cart') as $product_id=>$cartData)
-        {
-            OrderDetails::create([
-                'order_id'=>$order->id,
-                'item_id'=>$product_id,
-                'quantity'=>$cartData['quantity'],
-                'unit_price'=>$cartData['price'],
-                'subtotal'=>$cartData['subtotal'],
-            ]);
-
-            //stock update here
-            $product=Product::find($product_id);
-            $product->decrement('quantity',$cartData['quantity']);
-
-
-        }
-        session()->forget('cart');
-        return redirect()->route('home')->with('message','Order Placed Successfully');
-
-
-
-    }
 }
