@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    public function search()
+    {
+        $users=[];
+        if(\request()->has('search'))
+        {
+            $users=User::search(\request()->search)->get();
+        }
+
+//dd($users);
+        return view('frontend.search',compact('users'));
+    }
     public function home()
     {
         $products=Product::all();

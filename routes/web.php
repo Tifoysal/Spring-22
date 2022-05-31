@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\CategoryController;
 
 
 Route::get('/',[HomeController::class,'home'])->name('home');
+Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::post('/customer/registration',[HomeController::class,'customerRegistration'])->name('customer.registration');
 Route::get('/product/view/{id}',[HomeController::class,'showProduct'])->name('product.view');
 Route::get('/cart/view',[OrderController::class,'viewCart'])->name('cart.view');
